@@ -12,52 +12,30 @@
 
 #include "push_swap.h"
 
-static void	sort_copy(int **copy, int size)
+static void	normalize_array(t_stack *a, t_stack *b)
 {
 	int	i;
 	int	j;
-	int	temp;
+	int	count;
+	int	*normalized;
 
-	i = 0;
-	while (i < size - 1)
+	normalized = malloc(a->size * sizeof(int));
+	if (!normalized)
+		ft_error(a, b);
+	i = -1;
+	while (++i < a->size)
 	{
-		j = 0;
-		while (j < size - 1 - i)
-		{
-			if ((*copy)[j] > (*copy)[j + 1])
-			{
-				temp = (*copy)[j];
-				(*copy)[j] = (*copy)[j + 1];
-				(*copy)[j + 1] = temp;
-			}
-			j++;
-		}
-		i++;
+		count = 0;
+		j = -1;
+		while (++j < a->size)
+			if (a->arr[j] < a->arr[i])
+				count++;
+		normalized[i] = count;
 	}
-}
-
-static void	normalize_array(t_stack *a, int **copy)
-{
-	int	i;
-	int	j;
-
-	ft_memcpy(*copy, a->arr, a->size * sizeof(int *));
-	sort_copy(copy, a->size);
-	i = 0;
-	while (i < a->size)
-	{
-		j = 0;
-		while (j < a->size)
-		{
-			if (a->arr[i] == (*copy)[j])
-			{
-				a->arr[i] = j;
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
+	i = -1;
+	while (++i < a->size)
+		a->arr[i] = normalized[i];
+	free(normalized);
 }
 
 static void	sort_by_bit(t_stack *a, t_stack *b)
@@ -101,13 +79,9 @@ static void	radix_sort(t_stack *a, t_stack *b)
 
 void	sort_stack(t_stack *a, t_stack *b)
 {
-	int	*copy;
 	int	i;
 
-	copy = malloc(a->size * sizeof(int *));
-	if (!copy)
-		ft_error(a, b);
-	normalize_array(a, &copy);
+	normalize_array(a, b);
 	radix_sort(a, b);
 	while (!b->isempty)
 		push_a(a, b);
