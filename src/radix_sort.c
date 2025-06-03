@@ -40,19 +40,18 @@ static void	normalize_array(t_stack *a, t_stack *b)
 
 static void	sort_by_bit(t_stack *a, t_stack *b)
 {
-	int			j;
+	int		j;
 	static int	i = 0;
-	int			num;
+	int		num;
 
-	j = 0;
-	while (j < a->size)
+	j = -1;
+	while (++j < a->size)
 	{
 		num = a->arr[0];
 		if (((num >> i) & 1) == 1)
 			rotate_a(a);
 		else
 			push_b(a, b);
-		j++;
 	}
 	i++;
 }
@@ -67,13 +66,12 @@ static void	radix_sort(t_stack *a, t_stack *b)
 	max_bits = 0;
 	while ((max_num >> max_bits) != 0)
 		max_bits++;
-	i = 0;
-	while (i < max_bits)
+	i = -1;
+	while (++i < max_bits)
 	{
 		sort_by_bit(a, b);
 		while (!b->isempty[0])
 			push_a(a, b);
-		i++;
 	}
 }
 
@@ -85,12 +83,9 @@ void	sort_stack(t_stack *a, t_stack *b)
 	radix_sort(a, b);
 	while (!b->isempty)
 		push_a(a, b);
-	i = 0;
-	while (i < a->size)
-	{
+	i = -1;
+	while (++i < a->size)
 		if (a->arr[i] == i)
 			a->arr[i] = copy[i];
-		i++;
-	}
 	free(copy);
 }
