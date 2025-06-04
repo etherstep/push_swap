@@ -12,23 +12,6 @@
 
 #include "push_swap.h"
 
-bool	sorted(t_stack *a)
-{
-	int	temp;
-	int	i;
-
-	temp = a->arr[0];
-	i = 1;
-	while (i < a->size)
-	{
-		if (temp > a->arr[i])
-			return (false);
-		temp = a->arr[i];
-		i++;
-	}
-	return (true);
-}
-
 static void	rotate_by_pos(t_stack *a, int min_pos, int i)
 {
 	if (min_pos <= a->size / 2)
@@ -60,13 +43,18 @@ static void	find_smallest_value(t_stack *a, int *min_pos)
 	}
 }
 
-void	sort_five(t_stack *a, t_stack *b)
+void	sort_four_and_five(t_stack *a, t_stack *b)
 {
 	int	i;
 	int	min_pos;
+	int	iter;
 
+	if (a->size == 4)
+		iter = 1;
+	else
+		iter = 2;
 	i = 0;
-	while (i < 2)
+	while (i < iter)
 	{
 		min_pos = 0;
 		find_smallest_value(a, &min_pos);
@@ -77,8 +65,8 @@ void	sort_five(t_stack *a, t_stack *b)
 	sort_three(a);
 	if (b->arr[0] < b->arr[1])
 		swap_b(b);
-	push_a(a, b);
-	push_a(a, b);
+	while (iter--)
+		push_a(a, b);
 }
 
 void	sort_three(t_stack *a)
@@ -87,6 +75,12 @@ void	sort_three(t_stack *a)
 		swap_a(a);
 	if (a->arr[1] > a->arr[2])
 		reverse_rotate_a(a);
+	if (a->arr[0] > a->arr[1])
+		swap_a(a);
+}
+
+void	sort_two(t_stack *a)
+{
 	if (a->arr[0] > a->arr[1])
 		swap_a(a);
 }

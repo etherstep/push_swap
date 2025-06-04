@@ -45,8 +45,9 @@ void		reverse_rotate_b(t_stack *b);
 void		reverse_rotate_a_b(t_stack *a, t_stack *b);
 
 // Sorting
+void		sort_two(t_stack *a);
 void		sort_three(t_stack *a);
-void		sort_five(t_stack *a, t_stack *b);
+void		sort_four_and_five(t_stack *a, t_stack *b);
 void		sort_stack(t_stack *a, t_stack *b);
 bool		sorted(t_stack *a);
 

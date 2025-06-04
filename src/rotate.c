@@ -26,10 +26,11 @@ void	rotate_a(t_stack *a)
 			break ;
 		empty++;
 	}
+	if (empty <= 1)
+		return ;
 	i = 0;
-	temp = a->arr[empty];
-	a->arr[empty] = a->arr[i];
-	while (i < empty)
+	temp = a->arr[0];
+	while (i < empty - 1)
 	{
 		a->arr[i] = a->arr[i + 1];
 		i++;
@@ -51,10 +52,11 @@ void	rotate_b(t_stack *b)
 			break ;
 		empty++;
 	}
+	if (empty <= 1)
+		return ;
 	i = 0;
-	temp = b->arr[empty];
-	b->arr[empty] = b->arr[i];
-	while (i < empty)
+	temp = b->arr[0];
+	while (i < empty - 1)
 	{
 		b->arr[i] = b->arr[i + 1];
 		i++;

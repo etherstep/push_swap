@@ -12,6 +12,23 @@
 
 #include "push_swap.h"
 
+bool	sorted(t_stack *a)
+{
+	int	temp;
+	int	i;
+
+	temp = a->arr[0];
+	i = 1;
+	while (i < a->size)
+	{
+		if (temp > a->arr[i])
+			return (false);
+		temp = a->arr[i];
+		i++;
+	}
+	return (true);
+}
+
 void	ft_free(t_stack *a, t_stack *b)
 {
 	if (a && a->arr)
