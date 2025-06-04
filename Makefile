@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+# Run `make help` to see available options.
+
 # Colors and formatting
 BOLD		:= $(shell tput bold)
 GREEN		:= $(shell tput setaf 2)
