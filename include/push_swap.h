@@ -14,9 +14,6 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
-# include <stdbool.h>
-# include <stdlib.h>
-# include <unistd.h>
 
 typedef struct s_stack
 {
