@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
 
 static void	init_stack(t_stack *a, t_stack *b, char **av)
 {
@@ -46,7 +45,7 @@ int	main(int ac, char **av)
 	t_stack	b;
 
 	if (ac < 2)
-		exit(EXIT_FAILURE);
+		return (1);
 	check_inputs(&a, av);
 	init_stack(&a, &b, av);
 	if (check_duplicates(&a) == 0)
@@ -64,7 +63,6 @@ int	main(int ac, char **av)
 		sort_four_and_five(&a, &b);
 	else
 		sort_stack(&a, &b);
-	print_array(&a, &b);
 	ft_free(&a, &b);
 	exit(EXIT_SUCCESS);
 }
