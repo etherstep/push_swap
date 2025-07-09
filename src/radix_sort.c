@@ -105,12 +105,5 @@ void	sort_stack(t_stack *a, t_stack *b)
 		ft_error(a, b);
 	normalize_stack(a, &copy);
 	radix_sort(a, b);
-	i = 0;
-	while (i < a->size)
-	{
-		if (a->arr[i] == i)
-			a->arr[i] = copy[i];
-		i++;
-	}
 	free(copy);
 }
